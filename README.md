@@ -19,6 +19,7 @@ This game was built mainly with basic javascript. It's a game of two players, Fi
   Let The Function Be CheckGuess(x) will:
 
         - Take 1 Arguments: The Guessed Letter.
+        - Default Value For Both Local Variables Will Be False
         - Iterate Through The First Global Array To Check If The Letter Is In There
         - If There's A Match The Second Global Array Is Updated In The Same Position;
 
