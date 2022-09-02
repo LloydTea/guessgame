@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="guesschecker.css">
+</head>
+<body>
+    <div class="box-content">
+        <h1>Guess The Word</h1>
+        <p class="hide" id="showguess"></p>
+        <p id="show"></p>
+        <p id="progress"></p>
+        <img class="hide" id="result">
+        <div class="player1" id="player1">
+            <h3>Player 1: <br>Please Enter A Your Word <br><span class="smalltext">(Maximum Of 10 Character)</span></h3>
+            <input type="text" id="guessword" maxlength="15"  onkeyup="this.value = this.value.toUpperCase();">
+            <button class="mainbtn" onclick="setwords(guessword.value)">Hide Word</button>
+        </div>
+        <p id="remark"></p>
+        <div class="player2 hide" id="player2">
+            <h3>Player 2:<br>Please Enter Your First Letter</h3>
+            <input type="text" id="guessletter"  onkeyup="this.value = this.value.toUpperCase();" maxlength="1">
+            <button class="mainbtn" onclick="checkguess(guessletter.value)">Send Letter</button>
+        </div>
+    </div>
+<script src="guesschecker.js"></script>
+<footer>
+    <a href="https://lloyd.funnelignition.com/" target="_blank">
+        <img src="https://lloyd.funnelignition.com/wp-content/uploads/2022/08/LT-Green-Logo.png" width="100px">
+    </a>
+</footer>
+</body>
+</html>

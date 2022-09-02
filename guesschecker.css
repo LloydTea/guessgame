@@ -1,0 +1,55 @@
+
+body{
+	text-align:center;
+    background:#0e1a2d;
+    color: white;
+}
+input{
+	padding:10px;
+    font-size:18px;
+}
+.mainbtn, .hoverbtn:hover {
+    padding: 10px;
+    font-size: 18px;
+    color:#0e1a2d;
+    background: #64ffda;
+    border: 2px solid #64ffda;
+}
+
+.hoverbtn, .mainbtn:hover {
+    padding: 10px;
+    font-size: 18px;
+    color: #64ffda;
+    background: transparent;
+    border: 2px solid #64ffda;
+}
+#showguess {
+    padding: 10px;
+    font-size: 40px;
+    color: #64ffda;
+    background: transparent;
+    margin: auto auto;
+    max-width: 304px;
+    border: 2px solid #64ffda;
+}
+.smalltext{
+    font-size: 16px;
+}
+.hide{
+	display:none;
+}
+.box-content{
+    min-height:80vh;
+}
+
+#remark > img {
+    vertical-align: middle;
+}
+p#remark {
+    max-width: 300px;
+    text-align: left;
+    margin: auto;
+}
+#result{
+    max-width: 300px;
+}
