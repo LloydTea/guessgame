@@ -1,7 +1,7 @@
     const guessedwordletter = [];
     const hiddenwordletter = [];
     var no_of_guess;
-    var no_of_guess = 0;
+    var no_of_guess_made = 0;
     var no_of_guess_good = 0;
     var no_of_guess_bad = 0;
 	const setwords = (x) =>{
@@ -23,9 +23,9 @@
     const checkguess = (x) =>{
         var goodguess = false;
         var moretoguess = false;
-        if(no_of_guess < no_of_guess){
-            no_of_guess +=1
-            document.getElementById("progress").innerHTML = no_of_guess +" guesses out of "+ no_of_guess;
+        if(no_of_guess_made < no_of_guess){
+            no_of_guess_made +=1
+            document.getElementById("progress").innerHTML = no_of_guess_made +" guesses out of "+ no_of_guess;
             for(let i=0; i < hiddenwordletter.length; i++){
                 if(hiddenwordletter[i] == x){
                     guessedwordletter[i] = x;
