@@ -1,29 +1,26 @@
-# Word Guess Game
+# Word Guess Game (Personal project)
 
-This game was built mainly with basic javascript. It's a game of two players, First player enters a word second player guesses the letters in the word one at a time.
 
-## Exercise
+- ### Tools Used
 
-- ### Create Two Global Arrays And A Function "setword(x)" That Takes One Argument:
+        - JavaScript
+        - Bootstrap
+        - CSS
+        - HTML
 
-  The function setword(x) will:
+- ### Project Information
 
-        -  Takes 1 arguments: your input.
-        -  Convert To An Array And Add To One Of The Two Global Arrays
-        -  Create Same Number Of Array For The Second Global Array With All Values As "_"
+  Functions Of This Process
 
-  Sample input - Parameter = GOAT - First Array = [G,O,A,T] - Second Array = [_,_,_,_]
+        - Multiple Stages
+        - Index Shuffle To Select Words At Random
+        - Progress Bar
+        - Modal PopUp
+        - Responsive
 
-- ### Write Another Function With Two Local variable "GoodGuess" And "MoreToGuess":
 
-  Let The Function Be CheckGuess(x) will:
-
-        - Take 1 Arguments: The Guessed Letter.
-        - Default Value For Both Local Variables Will Be False
-        - Iterate Through The First Global Array To Check If The Letter Is In There
-        - If There's A Match The Second Global Array Is Updated In The Same Position;
-
-  Bonus: Accept floating point values for amount per day, and round the result to a round number.
+- ### Screenshot
+  ![Timer Screenshot](https://github.com/LloydTea/Calculator/blob/main/Calculator.png)
 
 ## Authors
 
