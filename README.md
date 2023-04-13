@@ -20,7 +20,7 @@
 
 
 - ### Screenshot
-  ![Timer Screenshot](https://github.com/LloydTea/Calculator/blob/main/Calculator.png)
+  ![Timer Screenshot](https://github.com/LloydTea/guessgame/blob/2ca9b95961c650d49946a3297ac5bd803f0bfbf5/Screenshot.png)
 
 ## Authors
 
