@@ -165,7 +165,7 @@ const nextStage = (x) =>{
         //Set Current Score To Stage Percentage Approximate To Two Decimal Places
         yourScoreTag.innerHTML = stagePercent.toFixed(2) + "%"
 
-        imgDisplayTag.src = "file:///Users/lloydgbenebitse-daniel/Downloads/webdevelopment/guessgame/congratulations.png"
+        imgDisplayTag.src = "https://github.com/LloydTea/guessgame/blob/814621ac4634c06f2c357921fa4b2411046f4772/Congratulations.png"
 
         //If Condition For Last Stage Of The Game
         if(stagePercent < 100){
@@ -181,7 +181,7 @@ const nextStage = (x) =>{
         }
     }else{
 
-        imgDisplayTag.src = "file:///Users/lloydgbenebitse-daniel/Downloads/webdevelopment/guessgame/gameover.png"
+        imgDisplayTag.src = "https://github.com/LloydTea/guessgame/blob/814621ac4634c06f2c357921fa4b2411046f4772/gameover.png"
         remarkHeadingTag.innerHTML ="You Can Do Better"
         remarkBodyTag.innerHTML ="Failure is when you stop trying"
         nextStageBtn.innerHTML = 'Try Again <i class="bi bi-arrow-right-circle"></i>'
