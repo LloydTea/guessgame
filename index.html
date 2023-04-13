@@ -21,25 +21,32 @@
                     </p>
                     <p class="fs-5 mb-0 text-start text-uppercase">Guess Game</p>
                     <p class="fs-2 text-capitalize">Personal project</p>
-                    <div class="row position-relative content-box rounded-3 pb-5 p-3 p-md-5 shadow text-dark bg-white text-center">
-                        <div class="col ps-0">
-                            <p class="text-start">Stage: <span id="stageCounter"></span></p>
+                    <div class="position-relative content-box rounded-3 shadow text-dark bg-white text-center">
+                        <div class="position-absolute rounded-3 shadow top-0 start-0 p-2 bg-warning">
+                            <p class="text-center mb-0">Your Score: <span id="yourScore" class="fw-bolder">0</span></p>
                         </div>
-                        <div class="col">
-                            <p class="text-center">Your Score: <span id="yourScore"></span></p>
+                        <div class="position-absolute rounded-3 shadow top-0 end-0 p-2 bg-warning">
+                            <p class="text-end mb-0">Highest Score: <span id="heigestScore"></span></p>
                         </div>
-                        <div class="col pe-0">
-                            <p class="text-end">Highest Score: <span id="heigestScore"></span></p>
+                        <div class="pb-5 p-3 p-md-5">
+                            <div class="text-center">
+                                <p class="mb-0">Stage: <span id="stageCounter"></span></p>
+                            </div>
+                            <div class="progress px-0 my-2 bg-dark text-center" style="height:30px">
+                                <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" id="progressbar"></div>
+                            </div>
+                            <input type="text" class="form-control text-center form-control-lg bg-dark text-white fs-1" readonly id="showguess">
+                            <p id="show" class="bg-warning rounded p-2 mt-3 border border-5 border-white border-opacity-50"></p>
+                            <p id="progress"></p>
+                            <div class="input-group mx-auto w-50 flex-nowrap mb-2" id="player2">
+                                <input type="text" class="form-control bg-dark text-white" placeholder="Type here..." id="guessletter" onkeyup="this.value = this.value.toUpperCase();" maxlength="1" aria-label="guessletter" autofocus aria-describedby="addon-wrapping">
+                                <button class="btn btn-lg btn-warning mainbtn" onclick="checkguess(guessletter.value)"><i class="bi bi-send-check"></i></button>
+                            </div>
                         </div>
-                        <div class="progress px-0 my-2 bg-dark text-center" style="height:30px">
-                            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" id="progressbar"></div>
-                        </div>
-                        <input type="text" class="form-control text-center form-control-lg bg-dark text-white fs-1" readonly id="showguess">
-                        <p id="show" class="bg-warning rounded p-2 mt-3 border border-5 border-white border-opacity-50"></p>
-                        <p id="progress"></p>
-                        <div class="input-group mx-auto w-50 flex-nowrap" id="player2">
-                            <input type="text" class="form-control bg-dark text-white" placeholder="Type here..." id="guessletter" onkeyup="this.value = this.value.toUpperCase();" maxlength="1" aria-label="guessletter" autofocus aria-describedby="addon-wrapping">
-                            <button class="btn btn-lg btn-warning mainbtn" onclick="checkguess(guessletter.value)"><i class="bi bi-send-check"></i></button>
+
+                        <div class="mx-auto">
+                            <p id="hintDisplay"></p>
+                            <button class="btn btn-warning mainbtn mx-auto rounded-bottom-0" onclick="showHint()"><i class="bi bi-eye-slash"></i> Show Hint</button>
                         </div>
                     </div>
                     <div class="text-center timer-controller">
@@ -57,7 +64,7 @@
               <div class="modal-body">
                     <p class="fs-4 text-center mb-0" id="remarkHeading"></p>
                     <p class="fs-6 text-center mb-0" id="remarkBody"></p>
-                    <img src="file:///Users/lloydgbenebitse-daniel/Downloads/webdevelopment/guessgame/congratulations.png" class="img-fluid w-75">
+                    <img src="file:///Users/lloydgbenebitse-daniel/Downloads/webdevelopment/guessgame/congratulations.png" id="imgDisplay" class="img-fluid w-75">
                     <div class="">
                         <button class="btn btn-warning mainbtn" id="nextStage"  data-bs-dismiss="modal">Next Challenge <i class="bi bi-arrow-right-circle"></i></button>
                     </div>

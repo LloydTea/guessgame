@@ -1,4 +1,4 @@
-const guessWordsArray = [["A"], ["BAT", "CAT"],["CAKE", "BAKE"]]
+const guessWordsArray = [["A","E","I","O","U"], ["BAT", "CAT", "Dog","PIG","RAT"], ["CAKE", "RICE", "PEAS", "BEANS"]]
 
 let stageCounter = 1;
 
@@ -13,7 +13,7 @@ var chances_given;
 let letterHolder = [];
 let hiddenwordletter = [];
 
-let highest_score = 100
+let highest_score = 100.00
 let new_score;
 
 //Set Guess And More To Guess To False
@@ -30,12 +30,16 @@ var progress = document.getElementById("progress")
 var stageCounterTag = document.getElementById("stageCounter")
 stageCounterTag.innerHTML = stageCounter;
 var heigestScoreTag = document.getElementById("heigestScore")
-heigestScoreTag.innerHTML = "100%"
+heigestScoreTag.innerHTML = "100.00%"
 var yourScoreTag = document.getElementById("yourScore")
 var remarkHeadingTag = document.getElementById("remarkHeading")
 var remarkBodyTag = document.getElementById("remarkBody")
 var stageProgressBar = document.getElementById("stageProgress")
 var nextStageBtn = document.getElementById("nextStage")
+var imgDisplayTag = document.getElementById("imgDisplay")
+
+var hintDisplayTag = document.getElementById("hintDisplay")
+
 
 //Input Field Declaration
 var inputGuess = document.getElementById("guessletter");
@@ -58,6 +62,8 @@ const setwords = (x) =>{
     document.getElementById("show").innerHTML = "It's a word of "+ hiddenwordletter.length + " letters and you have " + chances_given +" guesses to make.";
     showGuess.value = letterHolder.join('');
 }
+
+
 const gameStarter = () =>{
     let shuffle_index = Math.floor(Math.random() * guessWordsArray[stageCounter-1].length);
     console.log()
@@ -66,6 +72,7 @@ const gameStarter = () =>{
     guessCounter = 0;
     goodGuessCounter = 0;
 }
+
 gameStarter()
 
 //Event Listener When The Enter Key Is Pressed On The Input Field
@@ -82,9 +89,9 @@ nextStageBtn.addEventListener("click",function() {
 
 const checkguess = (x) =>{
     //If Number Of Guess Left Isn't 0
+    hintDisplayTag.innerHTML = ""
+    guessCounter++
     if(guessCounter < chances_given){
-
-        guessCounter++
         progress.innerHTML = guessCounter +" guesses out of "+ chances_given;
 
         //Check If Letter Is In The HiddenWordLetter Array
@@ -108,46 +115,77 @@ const checkguess = (x) =>{
             if (stageCounter < guessWordsArray.length) {
                 stageCounterTag.innerHTML = stageCounter+1
             }
-            nextStage()
+            nextStage(true)
         }
 
+    }else{
+        nextStage(false)
     }
     
 }
+
+
+const showHint = () =>{
+    if (stageCounter == 1) {
+        let hint = guessWordsArray[stageCounter-1]
+        hintDisplayTag.innerHTML ="The "+ (hint.indexOf(hiddenwordletter.join()) + 1) +" Vowel."
+    }else if(stageCounter == 2){
+        let shuffle_index = Math.floor(Math.random() * hiddenwordletter.length);
+        hintDisplayTag.innerHTML ="It's The Name Of An Animal, And The "+(shuffle_index+1)+" Letter is "+ hiddenwordletter[shuffle_index] +"."
+    }else if(stageCounter == 3){
+        let shuffle_index = Math.floor(Math.random() * hiddenwordletter.length);
+        hintDisplayTag.innerHTML ="It's The Name Of A Food, And The "+(shuffle_index+1)+" Letter is "+ hiddenwordletter[shuffle_index] +"."
+    }
+}
+
 
 const progressBarFunction = (x) =>{
     let widthPercent = ((x/hiddenwordletter.length)* 100)+"% !important"
     console.log(x)
     progressBar.style = "width:"+ widthPercent;
 }
-const nextStage = () =>{
+
+
+const nextStage = (x) =>{
     // Open PopUp
     myModal.show()
-    
-    //Increase Stage By 1
-    stageCounter++
+    if (x) {
+        //Increase Stage By 1
+        stageCounter++
 
-    //Convert Stage To Percentage
-    let stagePercent = ((stageCounter-1)/guessWordsArray.length)* 100
+        //Convert Stage To Percentage
+        let stagePercent = ((stageCounter-1)/guessWordsArray.length)* 100
 
-    //Sent Percentage As Width Of Stage Progress Bar
-    stageProgressBar.style = "width:"+ stagePercent+"% !important";
+        //Sent Percentage As Width Of Stage Progress Bar
+        stageProgressBar.style = "width:"+ stagePercent+"% !important";
 
-    // Set Remark Heading To Congratulations
-    remarkHeadingTag.innerHTML ="Congratulations"
+        // Set Remark Heading To Congratulations
+        remarkHeadingTag.innerHTML ="Congratulations"
 
-    //Set Current Score To Stage Percentage Approximate To Two Decimal Places
-    yourScoreTag.innerHTML = stagePercent.toFixed(2) + "%"
+        //Set Current Score To Stage Percentage Approximate To Two Decimal Places
+        yourScoreTag.innerHTML = stagePercent.toFixed(2) + "%"
 
-    //If Condition For Last Stage Of The Game
-    if(stagePercent < 100){
+        imgDisplayTag.src = "file:///Users/lloydgbenebitse-daniel/Downloads/webdevelopment/guessgame/congratulations.png"
 
-        //Set To Through To The Next Round
-        remarkBodyTag.innerHTML ="You're Through to the next round"
+        //If Condition For Last Stage Of The Game
+        if(stagePercent < 100){
+
+            //Set To Through To The Next Round
+            remarkBodyTag.innerHTML ="You're Through to the next round"
+            nextStageBtn.innerHTML = 'Next Challenge <i class="bi bi-arrow-right-circle"></i>'
+        }else{
+
+            //Set To Game Completed
+            remarkBodyTag.innerHTML ="You have successfully completed the game."
+            nextStageBtn.innerHTML = 'Start Over <i class="bi bi-arrow-right-circle"></i>'
+        }
     }else{
 
-        //Set To Game Completed
-        remarkBodyTag.innerHTML ="You have successfully completed the game."
+        imgDisplayTag.src = "file:///Users/lloydgbenebitse-daniel/Downloads/webdevelopment/guessgame/gameover.png"
+        remarkHeadingTag.innerHTML ="You Can Do Better"
+        remarkBodyTag.innerHTML ="Failure is when you stop trying"
+        nextStageBtn.innerHTML = 'Try Again <i class="bi bi-arrow-right-circle"></i>'
     }
+    
 
 }
