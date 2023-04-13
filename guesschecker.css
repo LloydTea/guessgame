@@ -8,29 +8,29 @@ input{
 	padding:10px;
     font-size:18px;
 }
-.mainbtn, .hoverbtn:hover {
-    padding: 10px;
-    font-size: 18px;
-    color:#0e1a2d;
-    background: #64ffda;
-    border: 2px solid #64ffda;
+.main-box{
+    background: linear-gradient(to right, #6cc6dc , #ffc008);
+}
+.content-box{
+    margin-inline-start: -80px !important;
+    margin-inline-end: -80px !important;
 }
 
-.hoverbtn, .mainbtn:hover {
-    padding: 10px;
-    font-size: 18px;
-    color: #64ffda;
-    background: transparent;
-    border: 2px solid #64ffda;
+@media only screen and (max-width: 600px){
+.content-box {
+    margin-inline-start: -30px !important;
+    margin-inline-end: -30px !important;
 }
+}
+.mainbtn{
+    color:#0e1a2d;
+    background: #64ffda;
+    border-color:#64ffda;
+}
+
+
 #showguess {
-    padding: 10px;
-    font-size: 40px;
-    color: #64ffda;
-    background: transparent;
-    margin: auto auto;
-    max-width: 304px;
-    border: 2px solid #64ffda;
+    letter-spacing:5px;
 }
 .smalltext{
     font-size: 16px;
@@ -52,4 +52,9 @@ p#remark {
 }
 #result{
     max-width: 300px;
+}
+
+footer {
+    padding: 15px;
+    padding-top: 30px;
 }

@@ -1,64 +1,153 @@
-    const guessedwordletter = [];
-    const hiddenwordletter = [];
-    var no_of_guess;
-    var no_of_guess_made = 0;
-    var no_of_guess_good = 0;
-    var no_of_guess_bad = 0;
-	const setwords = (x) =>{
-        document.getElementById("guessword").setAttribute("type","password");
-        const word_to_array =  Array.from(x)
-        for (let i=0; i < word_to_array.length; i++){
-        	guessedwordletter[i] = "_";
-            hiddenwordletter[i] = word_to_array[i];
+const guessWordsArray = [["A"], ["BAT", "CAT"],["CAKE", "BAKE"]]
+
+let stageCounter = 1;
+
+let choosenWord = [];
+
+let entryLetter = [];
+
+let guessCounter = 0;
+let goodGuessCounter = 0;
+var chances_given;
+
+let letterHolder = [];
+let hiddenwordletter = [];
+
+let highest_score = 100
+let new_score;
+
+//Set Guess And More To Guess To False
+var moretoguess = false;
+
+var showGuess = document.getElementById("showguess")
+
+// Progress Bar Declaration
+var progressBar = document.getElementById("progressbar")
+
+// Progress Text Change
+var progress = document.getElementById("progress")
+
+var stageCounterTag = document.getElementById("stageCounter")
+stageCounterTag.innerHTML = stageCounter;
+var heigestScoreTag = document.getElementById("heigestScore")
+heigestScoreTag.innerHTML = "100%"
+var yourScoreTag = document.getElementById("yourScore")
+var remarkHeadingTag = document.getElementById("remarkHeading")
+var remarkBodyTag = document.getElementById("remarkBody")
+var stageProgressBar = document.getElementById("stageProgress")
+var nextStageBtn = document.getElementById("nextStage")
+
+//Input Field Declaration
+var inputGuess = document.getElementById("guessletter");
+
+let myModal = new bootstrap.Modal(document.getElementById('complete'), {});
+
+// var displayModal = document.getElementById("complete")
+
+
+const setwords = (x) =>{
+    console.log(x)
+    progress.innerHTML = ""
+    hiddenwordletter =  Array.from(x)
+    for (let i=0; i < hiddenwordletter.length; i++){
+    	letterHolder[i] = "_";
+    }
+    //Set Number Of Guesses, Which Is 2 Plus The length Of The Hidden Word
+    chances_given = 2 + hiddenwordletter.length;
+
+    document.getElementById("show").innerHTML = "It's a word of "+ hiddenwordletter.length + " letters and you have " + chances_given +" guesses to make.";
+    showGuess.value = letterHolder.join('');
+}
+const gameStarter = () =>{
+    let shuffle_index = Math.floor(Math.random() * guessWordsArray[stageCounter-1].length);
+    console.log()
+    setwords(guessWordsArray[stageCounter-1][shuffle_index]);
+    progressBar.style = "width:0";
+    guessCounter = 0;
+    goodGuessCounter = 0;
+}
+gameStarter()
+
+//Event Listener When The Enter Key Is Pressed On The Input Field
+inputGuess.addEventListener("keypress", function(event) {
+  if (event.key === "Enter" && inputGuess.value != "") {
+    event.preventDefault();
+    checkguess(inputGuess.value)
+  }
+});
+
+nextStageBtn.addEventListener("click",function() {
+    gameStarter();
+})
+
+const checkguess = (x) =>{
+    //If Number Of Guess Left Isn't 0
+    if(guessCounter < chances_given){
+
+        guessCounter++
+        progress.innerHTML = guessCounter +" guesses out of "+ chances_given;
+
+        //Check If Letter Is In The HiddenWordLetter Array
+        if(hiddenwordletter.includes(x)){
+            let i = hiddenwordletter.indexOf(x)
+            letterHolder[i] = x;
+            hiddenwordletter[i] = "Done";
+            goodGuessCounter++;
+            progressBarFunction(goodGuessCounter)
+            console.log(letterHolder)
+            console.log(hiddenwordletter)
         }
-        no_of_guess = 2 + hiddenwordletter.length;
-        document.getElementById("show").innerHTML = "It's a word of "+ hiddenwordletter.length + " letters and you have " + (1.5*hiddenwordletter.length) +" guesses to make.";
-        document.getElementById("player2").classList.remove("class", "hide");
-        document.getElementById("player1").classList.add("class", "hide");
-        document.getElementById("showguess").classList.remove("class", "hide");
-        document.getElementById("showguess").innerHTML = guessedwordletter.join('');
+
+        showGuess.value = letterHolder.join('');
+        inputGuess.value="";
+        inputGuess.focus()
+
+        if(letterHolder.includes("_")){
+            moretoguess = true
+        }else{
+            if (stageCounter < guessWordsArray.length) {
+                stageCounterTag.innerHTML = stageCounter+1
+            }
+            nextStage()
+        }
+
     }
     
+}
 
-    const checkguess = (x) =>{
-        var goodguess = false;
-        var moretoguess = false;
-        if(no_of_guess_made < no_of_guess){
-            no_of_guess_made +=1
-            document.getElementById("progress").innerHTML = no_of_guess_made +" guesses out of "+ no_of_guess;
-            for(let i=0; i < hiddenwordletter.length; i++){
-                if(hiddenwordletter[i] == x){
-                    guessedwordletter[i] = x;
-                    goodguess = true
-                }
-                if(guessedwordletter[i] == "_" ){
-                    moretoguess = true
-                }
-            }
-            if(goodguess){
+const progressBarFunction = (x) =>{
+    let widthPercent = ((x/hiddenwordletter.length)* 100)+"% !important"
+    console.log(x)
+    progressBar.style = "width:"+ widthPercent;
+}
+const nextStage = () =>{
+    // Open PopUp
+    myModal.show()
+    
+    //Increase Stage By 1
+    stageCounter++
 
-                document.getElementById("remark").innerHTML +="<br><br><img src='https://lloyd.funnelignition.com/wp-content/uploads/2022/09/check.png' width='30px'> Yay, You've Guessed Right";
+    //Convert Stage To Percentage
+    let stagePercent = ((stageCounter-1)/guessWordsArray.length)* 100
 
-                document.getElementById("showguess").innerHTML = guessedwordletter.join('');
-                no_of_guess_good+=1
+    //Sent Percentage As Width Of Stage Progress Bar
+    stageProgressBar.style = "width:"+ stagePercent+"% !important";
 
-                if (!moretoguess){
-                    document.getElementById("remark").innerHTML = "<br> Yay, You Won <br> With "+ no_of_guess +" guesses";
-                    document.getElementById("player2").classList.add("class", "hide");
-                    document.getElementById("result").classList.remove("class", "hide");
-                    document.getElementById("result").setAttribute("src","https://lloyd.funnelignition.com/wp-content/uploads/2022/09/miggi-you-win.gif")
-                }
-            } else{
+    // Set Remark Heading To Congratulations
+    remarkHeadingTag.innerHTML ="Congratulations"
 
-                document.getElementById("remark").innerHTML += "<br><br><img src='https://lloyd.funnelignition.com/wp-content/uploads/2022/09/wrong.png' width='30px'> Wrong Guess, You Can Do Better";
-                no_of_guess_bad+=1
-            }
-        } 
-        else{
-            document.getElementById("remark").innerHTML = "You made <br><img src='https://lloyd.funnelignition.com/wp-content/uploads/2022/09/check.png' width='30px'> "+no_of_guess_good +" good guess <br><img src='https://lloyd.funnelignition.com/wp-content/uploads/2022/09/wrong.png' width='30px'> " + no_of_guess_bad +" bad ones";
-            document.getElementById("player2").classList.add("class", "hide");
-            document.getElementById("result").classList.remove("class", "hide");
-            document.getElementById("result").setAttribute("src","https://lloyd.funnelignition.com/wp-content/uploads/2022/09/you-lose.gif")
-        }
-        
-    } 
+    //Set Current Score To Stage Percentage Approximate To Two Decimal Places
+    yourScoreTag.innerHTML = stagePercent.toFixed(2) + "%"
+
+    //If Condition For Last Stage Of The Game
+    if(stagePercent < 100){
+
+        //Set To Through To The Next Round
+        remarkBodyTag.innerHTML ="You're Through to the next round"
+    }else{
+
+        //Set To Game Completed
+        remarkBodyTag.innerHTML ="You have successfully completed the game."
+    }
+
+}
