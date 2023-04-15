@@ -1,15 +1,23 @@
 const guessWordsArray = [["A","E","I","O","U"], ["BAT", "CAT", "Dog","PIG","RAT"], ["CAKE", "RICE", "PEAS", "BEANS"]]
 
+
+//Stage Counter
 let stageCounter = 1;
 
+
+//Choosen Word As An Empty Array
 let choosenWord = [];
 
-let entryLetter = [];
-
+// Guess Count And Hint Count For Every Stage
 let guessCounter = 0;
+
+// Good Guess Counter
 let goodGuessCounter = 0;
+
+// Chances Given For Every Stage
 var chances_given;
 
+//Player Guess Holder
 let letterHolder = [];
 let hiddenwordletter = [];
 
@@ -39,12 +47,15 @@ var nextStageBtn = document.getElementById("nextStage")
 var imgDisplayTag = document.getElementById("imgDisplay")
 
 var hintDisplayTag = document.getElementById("hintDisplay")
+var instruction = document.getElementById("show")
 
 
 //Input Field Declaration
 var inputGuess = document.getElementById("guessletter");
 
 let myModal = new bootstrap.Modal(document.getElementById('complete'), {});
+
+let rulesModal = new bootstrap.Modal(document.getElementById('rules'), {});
 
 // var displayModal = document.getElementById("complete")
 
@@ -57,13 +68,17 @@ const setwords = (x) =>{
     	letterHolder[i] = "_";
     }
     //Set Number Of Guesses, Which Is 2 Plus The length Of The Hidden Word
-    chances_given = 2 + hiddenwordletter.length;
-
-    document.getElementById("show").innerHTML = "It's a word of "+ hiddenwordletter.length + " letters and you have " + chances_given +" guesses to make.";
+    chances_given = 1 + hiddenwordletter.length;
+    if (stageCounter == 1) {
+        instruction.innerHTML = "It's Just One Letter And You Have 2 Guesses."
+    }else{
+        instruction.innerHTML = "It's a word of "+ hiddenwordletter.length + " letters and you have " + chances_given +" guesses to make.";
+    }
     showGuess.value = letterHolder.join('');
 }
 
 
+rulesModal.show()
 const gameStarter = () =>{
     let shuffle_index = Math.floor(Math.random() * guessWordsArray[stageCounter-1].length);
     console.log()
@@ -128,7 +143,7 @@ const checkguess = (x) =>{
 const showHint = () =>{
     if (stageCounter == 1) {
         let hint = guessWordsArray[stageCounter-1]
-        hintDisplayTag.innerHTML ="The "+ (hint.indexOf(hiddenwordletter.join()) + 1) +" Vowel."
+        hintDisplayTag.innerHTML ="The "+ (hint.indexOf(hiddenwordletter.join()) + 1) +" Vowel of the alphabet."
     }else if(stageCounter == 2){
         let shuffle_index = Math.floor(Math.random() * hiddenwordletter.length);
         hintDisplayTag.innerHTML ="It's The Name Of An Animal, And The "+(shuffle_index+1)+" Letter is "+ hiddenwordletter[shuffle_index] +"."
@@ -165,7 +180,7 @@ const nextStage = (x) =>{
         //Set Current Score To Stage Percentage Approximate To Two Decimal Places
         yourScoreTag.innerHTML = stagePercent.toFixed(2) + "%"
 
-        imgDisplayTag.src = "https://github.com/LloydTea/guessgame/blob/814621ac4634c06f2c357921fa4b2411046f4772/Congratulations.png"
+        imgDisplayTag.src = "https://raw.githubusercontent.com/LloydTea/guessgame/814621ac4634c06f2c357921fa4b2411046f4772/Congratulations.png"
 
         //If Condition For Last Stage Of The Game
         if(stagePercent < 100){
@@ -181,7 +196,7 @@ const nextStage = (x) =>{
         }
     }else{
 
-        imgDisplayTag.src = "https://github.com/LloydTea/guessgame/blob/814621ac4634c06f2c357921fa4b2411046f4772/gameover.png"
+        imgDisplayTag.src = "https://raw.githubusercontent.com/LloydTea/guessgame/814621ac4634c06f2c357921fa4b2411046f4772/gameover.png"
         remarkHeadingTag.innerHTML ="You Can Do Better"
         remarkBodyTag.innerHTML ="Failure is when you stop trying"
         nextStageBtn.innerHTML = 'Try Again <i class="bi bi-arrow-right-circle"></i>'

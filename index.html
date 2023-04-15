@@ -47,6 +47,8 @@
                         <div class="mx-auto">
                             <p id="hintDisplay"></p>
                             <button class="btn btn-warning mainbtn mx-auto rounded-bottom-0" onclick="showHint()"><i class="bi bi-eye-slash"></i> Show Hint</button>
+                            <button class="btn btn-warning mx-auto rounded-bottom-0" data-bs-toggle="modal" href="#rules" role="button">
+                            <i class="bi bi-card-checklist"></i> Show Rules</button>
                         </div>
                     </div>
                     <div class="text-center timer-controller">
@@ -58,13 +60,41 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="rules" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark">
+              <div class="modal-header bg-warning">
+                <p class="modal-title fs-5 text-dark">Guess Game</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                    <p class="fs-5">Rules Of The Game</p>
+                    <ol class="text-start">
+                        <li>All word or letters in this game are of the english alphabets.</li>
+                        <li>You get a limited number of guesses for each stage.</li>
+                        <li>You can input only 1 letter per guess.</li>
+                        <li>The show hint reduces your number of guess by 1.</li>
+                        <li>On completion of every stage, you proceed to the next round.</li>
+                        <li>When all guesses has been exhausted and the word or letter isn't complete the game ends.</li>
+                    </ol>
+                    <div class="">
+                    </div>
+              </div>
+              <div class="modal-footer">
+                        <button class="btn btn-warning mainbtn" id="startGame"  data-bs-dismiss="modal">Back To Game
+                            <i class="bi bi-arrow-right-circle"></i>
+                        </button>
+              </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="complete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark">
               <div class="modal-body">
                     <p class="fs-4 text-center mb-0" id="remarkHeading"></p>
                     <p class="fs-6 text-center mb-0" id="remarkBody"></p>
-                    <img src="https://github.com/LloydTea/guessgame/blob/814621ac4634c06f2c357921fa4b2411046f4772/Congratulations.png" id="imgDisplay" class="img-fluid w-75">
+                    <img src="https://raw.githubusercontent.com/LloydTea/guessgame/814621ac4634c06f2c357921fa4b2411046f4772/Congratulations.png" id="imgDisplay" class="img-fluid w-75">
                     <div class="">
                         <button class="btn btn-warning mainbtn" id="nextStage"  data-bs-dismiss="modal">Next Challenge <i class="bi bi-arrow-right-circle"></i></button>
                     </div>
