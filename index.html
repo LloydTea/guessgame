@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vanilla Javascript Stopwatch</title>
+    <title>Guess Game</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,7 +47,7 @@
                         <div class="mx-auto">
                             <p id="hintDisplay"></p>
                             <button class="btn btn-warning mainbtn mx-auto rounded-bottom-0" onclick="showHint()"><i class="bi bi-eye-slash"></i> Show Hint</button>
-                            <button class="btn btn-warning mx-auto rounded-bottom-0" data-bs-toggle="modal" href="#rules" role="button">
+                            <button class="btn btn-outline-warning mx-auto text-dark rounded-bottom-0" data-bs-toggle="modal" href="#rules" role="button">
                             <i class="bi bi-card-checklist"></i> Show Rules</button>
                         </div>
                     </div>
@@ -64,11 +64,10 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark">
               <div class="modal-header bg-warning">
-                <p class="modal-title fs-5 text-dark">Guess Game</p>
+                <p class="modal-title fs-5 text-dark">Rules And Instructions Of The Game</p>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                    <p class="fs-5">Rules Of The Game</p>
                     <ol class="text-start">
                         <li>All word or letters in this game are of the english alphabets.</li>
                         <li>You get a limited number of guesses for each stage.</li>

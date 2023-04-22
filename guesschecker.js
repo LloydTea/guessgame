@@ -1,4 +1,4 @@
-const guessWordsArray = [["A","E","I","O","U"], ["BAT", "CAT", "Dog","PIG","RAT"], ["CAKE", "RICE", "PEAS", "BEANS"]]
+const guessWordsArray = [["A","E","I","O","U"], ["BAT", "CAT", "DOG","PIG","RAT"], ["CAKE", "RICE", "PEAS", "BEANS"]]
 
 
 //Stage Counter
@@ -25,7 +25,7 @@ let highest_score = 100.00
 let new_score;
 
 //Set Guess And More To Guess To False
-var moretoguess = false;
+var moretoguess = true;
 
 var showGuess = document.getElementById("showguess")
 
@@ -106,32 +106,22 @@ const checkguess = (x) =>{
     //If Number Of Guess Left Isn't 0
     hintDisplayTag.innerHTML = ""
     guessCounter++
-    if(guessCounter < chances_given){
-        progress.innerHTML = guessCounter +" guesses out of "+ chances_given;
+    if(guessCounter <= chances_given){
+        progress.innerHTML = "You have used "+ guessCounter + " guess(es) out of "+ chances_given;
 
         //Check If Letter Is In The HiddenWordLetter Array
         if(hiddenwordletter.includes(x)){
             let i = hiddenwordletter.indexOf(x)
             letterHolder[i] = x;
-            hiddenwordletter[i] = "Done";
+            delete hiddenwordletter[i];
             goodGuessCounter++;
             progressBarFunction(goodGuessCounter)
-            console.log(letterHolder)
-            console.log(hiddenwordletter)
+            moreLettersToGuess()
         }
 
         showGuess.value = letterHolder.join('');
         inputGuess.value="";
         inputGuess.focus()
-
-        if(letterHolder.includes("_")){
-            moretoguess = true
-        }else{
-            if (stageCounter < guessWordsArray.length) {
-                stageCounterTag.innerHTML = stageCounter+1
-            }
-            nextStage(true)
-        }
 
     }else{
         nextStage(false)
@@ -139,20 +129,61 @@ const checkguess = (x) =>{
     
 }
 
-
-const showHint = () =>{
-    if (stageCounter == 1) {
-        let hint = guessWordsArray[stageCounter-1]
-        hintDisplayTag.innerHTML ="The "+ (hint.indexOf(hiddenwordletter.join()) + 1) +" Vowel of the alphabet."
-    }else if(stageCounter == 2){
-        let shuffle_index = Math.floor(Math.random() * hiddenwordletter.length);
-        hintDisplayTag.innerHTML ="It's The Name Of An Animal, And The "+(shuffle_index+1)+" Letter is "+ hiddenwordletter[shuffle_index] +"."
-    }else if(stageCounter == 3){
-        let shuffle_index = Math.floor(Math.random() * hiddenwordletter.length);
-        hintDisplayTag.innerHTML ="It's The Name Of A Food, And The "+(shuffle_index+1)+" Letter is "+ hiddenwordletter[shuffle_index] +"."
+const moreLettersToGuess = () =>{
+    if(letterHolder.includes("_")){
+            moretoguess = true
+    }else{
+        nextStage(true)
     }
 }
 
+const showHint = () =>{
+    guessCounter++
+    if (stageCounter == 1) {
+
+        let hint = guessWordsArray[stageCounter-1]
+
+        let index = hint.indexOf(hiddenwordletter.join()) + 1
+
+        let suffix = positionSuffix(index)
+
+        hintDisplayTag.innerHTML ="The <b>"+ index +suffix+"</b> Vowel of the alphabet."
+
+    }else if(stageCounter == 2){
+
+        let index = (Math.floor(Math.random() * hiddenwordletter.length));
+
+        let suffix = positionSuffix(index+1)
+
+        hintDisplayTag.innerHTML ="It's The Name Of An Animal, And The "+ (index+1) + suffix+" Letter is "+ hiddenwordletter[index] +"."
+
+    }else if(stageCounter == 3){
+
+        let index = (Math.floor(Math.random() * hiddenwordletter.length));
+
+        let suffix = positionSuffix(index+1)
+
+        hintDisplayTag.innerHTML ="It's The Name Of A Food, And The "+(index+1)+ suffix+" Letter is "+ hiddenwordletter[index] +"."
+
+    }
+
+    progress.innerHTML ="You have used "+ guessCounter +" guesses out of "+ chances_given;
+}
+
+const positionSuffix = (x) =>{
+    x = x.toString()
+    if (x[x.length-1] == "1") {
+        pSuffix = "st"
+    }else if (x[x.length-1] == "2") {
+        pSuffix = "nd"
+    }else if (x[x.length-1] == "3") {
+        pSuffix = "rd"
+    }else{
+        pSuffix = "th"
+    }
+
+    return pSuffix
+}
 
 const progressBarFunction = (x) =>{
     let widthPercent = ((x/hiddenwordletter.length)* 100)+"% !important"
@@ -162,12 +193,9 @@ const progressBarFunction = (x) =>{
 
 
 const nextStage = (x) =>{
-    // Open PopUp
-    myModal.show()
     if (x) {
         //Increase Stage By 1
         stageCounter++
-
         //Convert Stage To Percentage
         let stagePercent = ((stageCounter-1)/guessWordsArray.length)* 100
 
@@ -202,5 +230,7 @@ const nextStage = (x) =>{
         nextStageBtn.innerHTML = 'Try Again <i class="bi bi-arrow-right-circle"></i>'
     }
     
-
+    // Open PopUp
+    myModal.show()
+    stageCounterTag.innerHTML = stageCounter
 }
