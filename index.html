@@ -21,7 +21,7 @@
                     </p>
                     <p class="fs-5 mb-0 text-start text-uppercase">Guess Game</p>
                     <p class="fs-2 text-capitalize">Personal project</p>
-                    <div class="position-relative content-box rounded-3 shadow text-dark bg-white text-center">
+                    <div id="gameOn" class="position-relative content-box rounded-3 shadow text-dark bg-white text-center">
                         <div class="position-absolute rounded-3 shadow top-0 start-0 p-2 bg-warning">
                             <p class="text-center mb-0">Your Score: <span id="yourScore" class="fw-bolder">0</span></p>
                         </div>
@@ -50,6 +50,12 @@
                             <button class="btn btn-outline-warning mx-auto text-dark rounded-bottom-0" data-bs-toggle="modal" href="#rules" role="button">
                             <i class="bi bi-card-checklist"></i> Show Rules</button>
                         </div>
+                    </div>
+                    <div id="gameDone" class="position-relative content-box rounded-3 shadow text-dark bg-white text-center p-5">
+                        <p class="fs-4 text-center mb-0" id="gdHealdine">Congratulations</p>
+                        <p class="fs-6 text-center mb-0" id="gdRemark">Please enter your information below to save your score</p>
+                        <img id="gdImage"  class="img-fluid w-75">
+                        <a href="/" class="btn btn-warning mainbtn">Save And Restart </a>
                     </div>
                     <div class="text-center timer-controller">
                         <div >
