@@ -228,6 +228,7 @@ const nextStage = (x) =>{
         remarkHeadingTag.innerHTML ="You Can Do Better"
         remarkBodyTag.innerHTML ="Failure is when you stop trying"
         nextStageBtn.innerHTML = 'Try Again <i class="bi bi-arrow-right-circle"></i>'
+        stageCounter=1;
     }
     
     // Open PopUp
